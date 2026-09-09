@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>
+        Publish Book
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="form-container">
+
+    <h1>
+        📚 Publish Your Book
+    </h1>
+
+
+    <form
+        method="POST"
+        enctype="multipart/form-data"
+    >
+
+
+        <label>
+            Book Title
+        </label>
+
+        <input
+            name="title"
+            required
+        >
+
+
+        <label>
+            Language
+        </label>
+
+        <select name="language">
+
+            <option>
+                Hindi
+            </option>
+
+            <option>
+                English
+            </option>
+
+            <option>
+                Other
+            </option>
+
+        </select>
+
+
+        <label>
+            Description
+        </label>
+
+        <textarea
+            name="description"
+        ></textarea>
+
+
+        <label>
+            Keywords
+        </label>
+
+        <input
+            name="keywords"
+            placeholder="love, story, adventure"
+        >
+
+
+        <label>
+            Publish Type
+        </label>
+
+        <select name="publish_type">
+
+            <option>
+                eBook
+            </option>
+
+            <option>
+                Paperback
+            </option>
+
+            <option>
+                Hardcover
+            </option>
+
+        </select>
+
+
+        <label>
+            Paper Type
+        </label>
+
+        <select name="paper_type">
+
+            <option>
+                Black & White
+            </option>
+
+            <option>
+                Color
+            </option>
+
+        </select>
+
+
+        <label>
+            Paper Size
+        </label>
+
+        <select name="paper_size">
+
+            <option>
+                5 × 8
+            </option>
+
+            <option>
+                6 × 9
+            </option>
+
+            <option>
+                8 × 12
+            </option>
+
+        </select>
+
+
+        <label>
+            Book Cover
+        </label>
+
+        <select name="cover_type">
+
+            <option>
+                I will create my own cover
+            </option>
+
+            <option>
+                Platform will create it
+            </option>
+
+        </select>
+
+
+        <label>
+            Book PDF
+        </label>
+
+        <input
+            type="file"
+            name="pdf"
+            accept=".pdf"
+        >
+
+
+        <label>
+            Selling Price ₹
+        </label>
+
+        <input
+            type="number"
+            name="price"
+            min="0"
+        >
+
+
+        <button
+            class="button"
+            type="submit">
+
+            Submit Book
+
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+
+</html>

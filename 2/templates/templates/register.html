@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        Create {{ role }} ID
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="form-container">
+
+    <h1>
+        Create Your
+        {{ role|capitalize }} ID
+    </h1>
+
+
+    <form
+        method="POST"
+        enctype="multipart/form-data"
+    >
+
+
+        <label>
+            User Name
+        </label>
+
+        <input
+            name="username"
+            required
+        >
+
+
+        <label>
+            Name
+        </label>
+
+        <input
+            name="name"
+            required
+        >
+
+
+        <label>
+            Mobile Number
+        </label>
+
+        <input
+            name="number"
+            required
+        >
+
+
+        <label>
+            Email
+        </label>
+
+        <input
+            type="email"
+            name="email"
+        >
+
+
+        <label>
+            Address
+        </label>
+
+        <textarea
+            name="address"
+        ></textarea>
+
+
+        {% if role == "writer" %}
+
+        <label>
+            Bank Details
+        </label>
+
+        <textarea
+            name="bank_details"
+        ></textarea>
+
+        {% endif %}
+
+
+        {% if role == "delivery" %}
+
+        <label>
+            Driving Licence
+        </label>
+
+        <input
+            type="file"
+            name="driving_license"
+        >
+
+
+        <label>
+            Vehicle RC
+        </label>
+
+        <input
+            type="file"
+            name="vehicle_rc"
+        >
+
+        {% endif %}
+
+
+        <label>
+            Password
+        </label>
+
+        <input
+            type="password"
+            name="password"
+            required
+        >
+
+
+        <button
+            class="button"
+            type="submit">
+
+            Create ID
+
+        </button>
+
+
+    </form>
+
+
+    <p>
+        Already have an account?
+        <a href="/login">
+            Sign In
+        </a>
+    </p>
+
+</div>
+
+</body>
+
+</html>

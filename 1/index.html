@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>BookConnect — Write • Print • Read • Deliver</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+  <a class="brand" href="#" onclick="goHome()">
+    <span class="brand-icon">📖</span>
+
+    <span>
+      Book<span>Connect</span>
+    </span>
+  </a>
+
+  <nav>
+    <a href="#how">How it works</a>
+    <a href="#roles">Join</a>
+    <a href="#books">Books</a>
+  </nav>
+
+  <button class="outline-btn" onclick="openLogin()">
+    Sign in
+  </button>
+
+</header>
+
+
+<main>
+
+  <!-- HERO SECTION -->
+
+  <section class="hero">
+
+    <div class="hero-copy">
+
+      <span class="eyebrow">
+        WRITE · PRINT · READ · DELIVER
+      </span>
+
+      <h1>
+        Books connect<br>
+        <em>people.</em>
+      </h1>
+
+      <p>
+        A simple platform where writers publish,
+        printers create books, delivery partners move them,
+        and readers discover their next story.
+      </p>
+
+      <div class="hero-actions">
+
+        <button class="primary-btn" onclick="scrollToRoles()">
+          Get started →
+        </button>
+
+        <button
+          class="text-btn"
+          onclick="document.querySelector('#how').scrollIntoView({behavior:'smooth'})">
+
+          See how it works ↓
+
+        </button>
+
+      </div>
+
+      <div class="trust-row">
+
+        <span>✦ Easy publishing</span>
+        <span>✦ Track every order</span>
+        <span>✦ Secure checkout</span>
+
+      </div>
+
+    </div>
+
+
+    <div class="hero-art">
+
+      <div class="book-stack">
+
+        <div class="book book-a">
+          WRITE
+        </div>
+
+        <div class="book book-b">
+          READ
+        </div>
+
+        <div class="book book-c">
+          CONNECT
+        </div>
+
+      </div>
+
+
+      <div class="floating-card card-one">
+        ✍️
+        <b>Publish</b>
+        <small>Your story matters.</small>
+      </div>
+
+
+      <div class="floating-card card-two">
+        ⭐
+        <b>4.8 / 5</b>
+        <small>Reader ratings</small>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ROLE SECTION -->
+
+  <section id="roles" class="section">
+
+    <div class="section-heading">
+
+      <span class="eyebrow">
+        CHOOSE YOUR ROLE
+      </span>
+
+      <h2>
+        How will you be part of the book journey?
+      </h2>
+
+      <p>
+        Select a role to create your account.
+      </p>
+
+    </div>
+
+
+    <div class="role-grid">
+
+
+      <article class="role-card writer">
+
+        <div class="role-icon">
+          ✍️
+        </div>
+
+        <h3>
+          Writer
+        </h3>
+
+        <p>
+          Publish your ideas as eBook,
+          paperback or hardcover.
+        </p>
+
+        <button onclick="startFlow('writer')">
+          Join as Writer →
+        </button>
+
+      </article>
+
+
+      <article class="role-card printer">
+
+        <div class="role-icon">
+          🖨️
+        </div>
+
+        <h3>
+          Printer
+        </h3>
+
+        <p>
+          Receive book orders, print them
+          and hand them to delivery.
+        </p>
+
+        <button onclick="startFlow('printer')">
+          Join as Printer →
+        </button>
+
+      </article>
+
+
+      <article class="role-card reader">
+
+        <div class="role-icon">
+          📚
+        </div>
+
+        <h3>
+          Reader
+        </h3>
+
+        <p>
+          Discover books, order them,
+          track delivery and review them.
+        </p>
+
+        <button onclick="startFlow('reader')">
+          Join as Reader →
+        </button>
+
+      </article>
+
+
+      <article class="role-card delivery">
+
+        <div class="role-icon">
+          🛵
+        </div>
+
+        <h3>
+          Delivery Boy
+        </h3>
+
+        <p>
+          Pick up printed books and
+          deliver them with OTP confirmation.
+        </p>
+
+        <button onclick="startFlow('delivery')">
+          Join as Delivery →
+        </button>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- HOW IT WORKS -->
+
+  <section id="how" class="section soft">
+
+    <div class="section-heading">
+
+      <span class="eyebrow">
+        ONE PLATFORM · FOUR ROLES
+      </span>
+
+      <h2>
+        From manuscript to doorstep.
+      </h2>
+
+    </div>
+
+
+    <div class="timeline">
+
+      <div>
+        <b>01</b>
+        <span>Writer publishes</span>
+        <small>
+          Book details → PDF → cover → price
+        </small>
+      </div>
+
+      <div>
+        <b>02</b>
+        <span>Printer creates</span>
+        <small>
+          Accept order → print → quality check
+        </small>
+      </div>
+
+      <div>
+        <b>03</b>
+        <span>Delivery moves</span>
+        <small>
+          Pickup → navigate → OTP
+        </small>
+      </div>
+
+      <div>
+        <b>04</b>
+        <span>Reader enjoys</span>
+        <small>
+          Receive → review → rate
+        </small>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- BOOK SECTION -->
+
+  <section id="books" class="section">
+
+    <div class="section-heading row-heading">
+
+      <div>
+
+        <span class="eyebrow">
+          DISCOVER
+        </span>
+
+        <h2>
+          Popular books
+        </h2>
+
+      </div>
+
+      <button
+        class="text-btn"
+        onclick="startFlow('reader')">
+
+        Browse all →
+
+      </button>
+
+    </div>
+
+
+    <div class="book-grid">
+
+
+      <article class="book-card">
+
+        <div class="cover cover1">
+          THE<br>
+          SILENT<br>
+          JOURNEY
+        </div>
+
+        <h3>
+          The Silent Journey
+        </h3>
+
+        <p>
+          By Anil Verma
+        </p>
+
+        <strong>
+          ₹250
+        </strong>
+
+      </article>
+
+
+      <article class="book-card">
+
+        <div class="cover cover2">
+          MINDFUL<br>
+          LIVING
+        </div>
+
+        <h3>
+          Mindful Living
+        </h3>
+
+        <p>
+          By Priya Sharma
+        </p>
+
+        <strong>
+          ₹300
+        </strong>
+
+      </article>
+
+
+      <article class="book-card">
+
+        <div class="cover cover3">
+          TECH<br>
+          SIMPLIFIED
+        </div>
+
+        <h3>
+          Tech Simplified
+        </h3>
+
+        <p>
+          By Rohit Mehta
+        </p>
+
+        <strong>
+          ₹350
+        </strong>
+
+      </article>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <div class="brand">
+
+    <span class="brand-icon">
+      📖
+    </span>
+
+    <span>
+      Book<span>Connect</span>
+    </span>
+
+  </div>
+
+  <p>
+    Stories travel. People connect.
+  </p>
+
+</footer>
+
+
+<!-- POPUP -->
+
+<div id="modal" class="modal" aria-hidden="true">
+
+  <div class="modal-box">
+
+    <button
+      class="close"
+      onclick="closeModal()">
+
+      ×
+
+    </button>
+
+    <div id="modalContent"></div>
+
+  </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

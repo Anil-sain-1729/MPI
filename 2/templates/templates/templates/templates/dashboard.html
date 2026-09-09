@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>
+        BookConnect Dashboard
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <h2>
+        📖 BookConnect
+    </h2>
+
+    <nav>
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </nav>
+
+</header>
+
+
+<section class="dashboard">
+
+    <h1>
+        Welcome,
+        {{ user["name"] }}
+    </h1>
+
+    <p>
+        Role:
+        <strong>
+            {{ user["role"]|capitalize }}
+        </strong>
+    </p>
+
+
+    {% if user["role"] == "writer" %}
+
+        <a
+            class="button"
+            href="/publish-book">
+
+            📚 Publish New Book
+
+        </a>
+
+
+        <h2>
+            My Books
+        </h2>
+
+
+        {% for book in books %}
+
+        <div class="book">
+
+            <h3>
+                {{ book["title"] }}
+            </h3>
+
+            <p>
+                {{ book["language"] }}
+            </p>
+
+            <p>
+                Status:
+                {{ book["status"] }}
+            </p>
+
+            <strong>
+                ₹{{ book["price"] }}
+            </strong>
+
+        </div>
+
+        {% else %}
+
+        <p>
+            You have not published any books yet.
+        </p>
+
+        {% endfor %}
+
+
+    {% elif user["role"] == "reader" %}
+
+        <h2>
+            My Orders
+        </h2>
+
+
+        {% for order in orders %}
+
+        <div class="book">
+
+            <h3>
+                {{ order["title"] }}
+            </h3>
+
+            <p>
+                Status:
+                {{ order["status"] }}
+            </p>
+
+            <p>
+                Payment:
+                {{ order["payment_method"] }}
+            </p>
+
+        </div>
+
+        {% else %}
+
+        <p>
+            You have no orders.
+        </p>
+
+        {% endfor %}
+
+
+    {% elif user["role"] == "printer" %}
+
+        <h2>
+            Book Orders
+        </h2>
+
+
+        {% for order in orders %}
+
+        <div class="book">
+
+            <h3>
+                {{ order["title"] }}
+            </h3>
+
+            <p>
+                Status:
+                {{ order["status"] }}
+            </p>
+
+            {% if order["status"] == "Order Placed" %}
+
+            <a
+                class="button"
+                href="/accept-order/{{ order['id'] }}">
+
+                Accept Order
+
+            </a>
+
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+
+    {% elif user["role"] == "delivery" %}
+
+        <h2>
+            Delivery Orders
+        </h2>
+
+
+        {% for order in orders %}
+
+        <div class="book">
+
+            <h3>
+                {{ order["title"] }}
+            </h3>
+
+            <p>
+                {{ order["address"] }}
+            </p>
+
+            <p>
+                {{ order["status"] }}
+            </p>
+
+
+            <form
+                method="POST"
+                action="/complete-delivery/{{ order['id'] }}">
+
+                <input
+                    name="otp"
+                    placeholder="Enter OTP"
+                    maxlength="6"
+                >
+
+                <button
+                    class="button"
+                    type="submit">
+
+                    Verify OTP
+
+                </button>
+
+            </form>
+
+        </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+</section>
+
+</body>
+
+</html>

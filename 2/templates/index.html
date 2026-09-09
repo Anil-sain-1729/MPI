@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BookConnect</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <h2>📖 BookConnect</h2>
+
+    <nav>
+
+        <a href="/">Home</a>
+
+        <a href="/register/writer">
+            Writer
+        </a>
+
+        <a href="/register/printer">
+            Printer
+        </a>
+
+        <a href="/register/reader">
+            Reader
+        </a>
+
+        <a href="/register/delivery">
+            Delivery
+        </a>
+
+        <a href="/login">
+            Sign In
+        </a>
+
+    </nav>
+
+</header>
+
+
+<section class="hero">
+
+    <p>WRITE · PRINT · READ · DELIVER</p>
+
+    <h1>
+        Books connect
+        <span>people.</span>
+    </h1>
+
+    <p>
+        Publish your story, print books,
+        deliver them and discover new readers.
+    </p>
+
+    <a class="button"
+       href="#roles">
+
+        Get Started →
+
+    </a>
+
+</section>
+
+
+<section id="roles">
+
+    <h2>
+        Choose Your Role
+    </h2>
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div class="icon">
+                ✍️
+            </div>
+
+            <h3>
+                Writer
+            </h3>
+
+            <p>
+                Publish your books.
+            </p>
+
+            <a href="/register/writer">
+                Join as Writer
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                🖨️
+            </div>
+
+            <h3>
+                Printer
+            </h3>
+
+            <p>
+                Print books for readers.
+            </p>
+
+            <a href="/register/printer">
+                Join as Printer
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                📚
+            </div>
+
+            <h3>
+                Reader
+            </h3>
+
+            <p>
+                Discover and buy books.
+            </p>
+
+            <a href="/register/reader">
+                Join as Reader
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                🛵
+            </div>
+
+            <h3>
+                Delivery Boy
+            </h3>
+
+            <p>
+                Deliver books to readers.
+            </p>
+
+            <a href="/register/delivery">
+                Join as Delivery
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<section>
+
+    <h2>
+        Popular Books
+    </h2>
+
+
+    <div class="books">
+
+        {% for book in books %}
+
+        <div class="book">
+
+            <h3>
+                {{ book["title"] }}
+            </h3>
+
+            <p>
+                By {{ book["writer_name"] }}
+            </p>
+
+            <p>
+                {{ book["description"] }}
+            </p>
+
+            <strong>
+                ₹{{ book["price"] }}
+            </strong>
+
+        </div>
+
+        {% else %}
+
+        <p>
+            No published books yet.
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 BookConnect
+    </p>
+
+</footer>
+
+</body>
+
+</html>

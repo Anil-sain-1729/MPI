@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>
+        BookConnect Login
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="form-container">
+
+    <h1>
+        Welcome Back
+    </h1>
+
+    <p>
+        Sign in to your BookConnect account.
+    </p>
+
+
+    <form method="POST">
+
+        <label>
+            User Name
+        </label>
+
+        <input
+            name="username"
+            required
+        >
+
+
+        <label>
+            Password
+        </label>
+
+        <input
+            type="password"
+            name="password"
+            required
+        >
+
+
+        <button
+            class="button"
+            type="submit">
+
+            Sign In
+
+        </button>
+
+    </form>
+
+
+    <p>
+        New user?
+        <a href="/">
+            Create an ID
+        </a>
+    </p>
+
+</div>
+
+</body>
+
+</html>
