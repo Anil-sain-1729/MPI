@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Student Management System
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+    <h2>
+        Student Management
+    </h2>
+
+    <span>
+        Admin Dashboard
+    </span>
+
+</header>
+
+
+<main class="container">
+
+
+    <section class="welcome">
+
+        <h1>
+            Student Management & Attendance System
+        </h1>
+
+        <p>
+            Manage students, courses and attendance
+            from one website.
+        </p>
+
+    </section>
+
+
+
+    <section class="cards">
+
+
+        <div class="card">
+
+            <h3>
+                Total Students
+            </h3>
+
+            <h2>
+                {{ total }}
+            </h2>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <h3>
+                Average Attendance
+            </h3>
+
+            <h2>
+                {{ average }}%
+            </h2>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <h3>
+                Eligible Students
+            </h3>
+
+            <h2>
+                {{ eligible }}
+            </h2>
+
+        </div>
+
+
+    </section>
+
+
+
+    <section class="box">
+
+        <h2>
+            Add New Student
+        </h2>
+
+
+        <form
+            action="/add"
+            method="POST"
+            class="student-form">
+
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Student Name"
+                required>
+
+
+            <input
+                type="text"
+                name="roll_no"
+                placeholder="Roll Number"
+                required>
+
+
+            <input
+                type="text"
+                name="course"
+                placeholder="Course"
+                required>
+
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                required>
+
+
+            <input
+                type="number"
+                name="attendance"
+                placeholder="Attendance %"
+                min="0"
+                max="100"
+                required>
+
+
+            <button type="submit">
+
+                Add Student
+
+            </button>
+
+
+        </form>
+
+    </section>
+
+
+
+    <section class="box">
+
+        <div class="table-header">
+
+            <h2>
+                Student List
+            </h2>
+
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Search student..."
+                onkeyup="searchStudent()">
+
+        </div>
+
+
+
+        <div class="table-container">
+
+
+            <table id="studentTable">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Name</th>
+
+                        <th>Roll No</th>
+
+                        <th>Course</th>
+
+                        <th>Email</th>
+
+                        <th>Attendance</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+
+                <tbody>
+
+
+                    {% for student in students %}
+
+                    <tr>
+
+                        <td>
+                            {{ student.id }}
+                        </td>
+
+                        <td>
+                            {{ student.name }}
+                        </td>
+
+                        <td>
+                            {{ student.roll_no }}
+                        </td>
+
+                        <td>
+                            {{ student.course }}
+                        </td>
+
+                        <td>
+                            {{ student.email }}
+                        </td>
+
+                        <td>
+
+                            {% if student.attendance >= 75 %}
+
+                                <span class="good">
+                                    {{ student.attendance }}%
+                                </span>
+
+                            {% else %}
+
+                                <span class="low">
+                                    {{ student.attendance }}%
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            <a
+                                class="delete"
+                                href="/delete/{{ student.id }}"
+                                onclick="return confirm('Delete this student?')">
+
+                                Delete
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+    Student Management System © 2026
+
+</footer>
+
+
+<script src="{{ url_for('static',
+        filename='script.js') }}">
+</script>
+
+
+</body>
+
+</html>
