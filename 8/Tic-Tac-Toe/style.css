@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-container {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    margin-bottom: 10px;
+    font-size: 40px;
+}
+
+#status {
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.cell {
+    font-size: 50px;
+    font-weight: bold;
+    border: none;
+    background: #f1f1f1;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.cell:hover {
+    background: #ddd;
+}
+
+.cell.x {
+    color: #e63946;
+}
+
+.cell.o {
+    color: #457b9d;
+}
+
+#resetBtn {
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    background: #333;
+    color: white;
+    cursor: pointer;
+}
+
+#resetBtn:hover {
+    background: #555;
+}
+
+@media (max-width: 500px) {
+    .board {
+        grid-template-columns: repeat(3, 80px);
+        grid-template-rows: repeat(3, 80px);
+    }
+
+    .cell {
+        font-size: 40px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+}
