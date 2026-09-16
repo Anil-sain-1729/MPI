@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chess Arena</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="app">
+  <header>
+    <div>
+      <div class="eyebrow">FULL-STACK CHESS</div>
+      <h1>♔ Chess Arena</h1>
+      <p>Play chess in your browser with Python + Flask.</p>
+    </div>
+    <div class="badge">♟ 8 × 8</div>
+  </header>
+
+  <main class="layout">
+    <section class="board-card">
+      <div class="board-wrap">
+        <div id="board" class="board" aria-label="Chess board"></div>
+      </div>
+      <div class="board-actions">
+        <button id="newGame">New Game</button>
+        <button id="undo" class="secondary">↶ Undo</button>
+      </div>
+    </section>
+
+    <aside class="panel">
+      <div class="turn-box">
+        <span>TURN</span>
+        <strong id="turn">White</strong>
+      </div>
+      <div id="status" class="status">White to move</div>
+
+      <h2>Move History</h2>
+      <div id="history" class="history">No moves yet.</div>
+
+      <h2>How to Play</h2>
+      <ul>
+        <li>Click a piece to select it.</li>
+        <li>Green squares show legal moves.</li>
+        <li>Click a green square to move.</li>
+        <li>Pawn automatically promotes to Queen.</li>
+      </ul>
+      <div class="legend">
+        <span><i class="dot green"></i> Legal move</span>
+        <span><i class="dot gold"></i> Selected</span>
+      </div>
+    </aside>
+  </main>
+</div>
+
+<div id="gameModal" class="modal hidden">
+  <div class="modal-box">
+    <div class="trophy">♛</div>
+    <h2 id="modalTitle">Game Over</h2>
+    <p id="modalText"></p>
+    <button id="modalNew">Play Again</button>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

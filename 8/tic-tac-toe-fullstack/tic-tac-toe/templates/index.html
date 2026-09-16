@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tic-Tac-Toe</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+<header>
+<h1>TIC <span>×</span> TAC <span>×</span> TOE</h1>
+<p>HTML • CSS • JavaScript • Python Flask</p>
+</header>
+
+<div class="modes">
+<button id="computerMode" class="mode active">🤖 vs Computer</button>
+<button id="playerMode" class="mode">👥 2 Players</button>
+</div>
+
+<div class="scoreboard">
+<div><small>PLAYER X</small><b id="scoreX">0</b></div>
+<div><small>DRAW</small><b id="scoreDraw">0</b></div>
+<div><small id="oName">COMPUTER O</small><b id="scoreO">0</b></div>
+</div>
+
+<div id="turn" class="turn">Player X's Turn</div>
+
+<div class="board" id="board">
+<div class="cell" data-index="0"></div>
+<div class="cell" data-index="1"></div>
+<div class="cell" data-index="2"></div>
+<div class="cell" data-index="3"></div>
+<div class="cell" data-index="4"></div>
+<div class="cell" data-index="5"></div>
+<div class="cell" data-index="6"></div>
+<div class="cell" data-index="7"></div>
+<div class="cell" data-index="8"></div>
+<div id="winLine" class="win-line"></div>
+</div>
+
+<div id="status" class="status">Choose an empty box.</div>
+
+<div class="controls">
+<button id="newGame">🔄 New Game</button>
+<button id="resetScore">🗑 Reset Score</button>
+</div>
+
+<div class="rules">
+<h2>How to Play</h2>
+<p>1️⃣ Put X or O in an empty box.</p>
+<p>2️⃣ Make three symbols in one line.</p>
+<p>3️⃣ Horizontal, vertical and diagonal lines count.</p>
+</div>
+</div>
+
+<div id="modal" class="modal hidden">
+<div class="modal-box">
+<div id="resultIcon">🏆</div>
+<h2 id="resultTitle">Player X Wins!</h2>
+<p id="resultText">Congratulations!</p>
+<button id="playAgain">Play Again</button>
+</div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
