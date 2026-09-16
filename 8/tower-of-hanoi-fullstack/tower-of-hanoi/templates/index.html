@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tower of Hanoi</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="app">
+<header class="header">
+    <div>
+        <div class="brand">TOWER<span>OF</span>HANOI</div>
+        <p class="subtitle">Learn • Play • Solve</p>
+    </div>
+    <div class="difficulty">
+        <label for="discCount">Discs</label>
+        <select id="discCount">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5" selected>5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+        </select>
+        <button id="newGameBtn">New Game</button>
+    </div>
+</header>
+
+<section class="stats">
+    <div class="stat-card"><span>Moves</span><strong id="moves">0</strong></div>
+    <div class="stat-card"><span>Minimum</span><strong id="minimum">31</strong></div>
+    <div class="stat-card"><span>Time</span><strong id="timer">00:00</strong></div>
+    <div class="stat-card"><span>Progress</span><strong id="progress">0%</strong></div>
+</section>
+
+<main class="game-area">
+    <div class="move-info"><div id="moveText">Select a top disc to begin.</div></div>
+
+    <svg id="arrowSvg" class="arrow-svg">
+        <defs>
+            <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L9,3 z"></path>
+            </marker>
+        </defs>
+        <line id="arrowLine" marker-end="url(#arrowHead)"></line>
+    </svg>
+
+    <div id="board" class="board">
+        <div class="tower-wrapper" data-tower="0">
+            <div class="tower-label">A</div>
+            <div class="tower">
+                <div class="rod"></div><div class="base"></div>
+                <div class="discs" id="tower0"></div>
+            </div>
+            <div class="tower-name">SOURCE</div>
+        </div>
+
+        <div class="tower-wrapper" data-tower="1">
+            <div class="tower-label">B</div>
+            <div class="tower">
+                <div class="rod"></div><div class="base"></div>
+                <div class="discs" id="tower1"></div>
+            </div>
+            <div class="tower-name">AUXILIARY</div>
+        </div>
+
+        <div class="tower-wrapper" data-tower="2">
+            <div class="tower-label">C</div>
+            <div class="tower">
+                <div class="rod"></div><div class="base"></div>
+                <div class="discs" id="tower2"></div>
+            </div>
+            <div class="tower-name">DESTINATION</div>
+        </div>
+    </div>
+
+    <section class="controls">
+        <button id="hintBtn" class="control-button hint">💡 Hint</button>
+        <button id="undoBtn" class="control-button">↶ Undo</button>
+        <button id="resetBtn" class="control-button">↻ Reset</button>
+        <button id="autoBtn" class="control-button auto">▶ Auto Solve</button>
+        <button id="pauseBtn" class="control-button">⏸ Pause</button>
+    </section>
+
+    <section class="instructions">
+        <h2>How to Play</h2>
+        <div class="rules">
+            <div class="rule"><div class="number">1</div><p>Move only the top disc from a tower.</p></div>
+            <div class="rule"><div class="number">2</div><p>A larger disc can never be placed on a smaller disc.</p></div>
+            <div class="rule"><div class="number">3</div><p>Move all discs from Tower A to Tower C.</p></div>
+        </div>
+        <p class="tip">💡 Click a top disc and then click another tower, or drag the top disc directly.</p>
+    </section>
+</main>
+
+<div id="message" class="message"></div>
+
+<div id="winModal" class="modal hidden">
+    <div class="modal-box">
+        <div class="win-icon">🏆</div>
+        <h1>Puzzle Solved!</h1>
+        <p>Congratulations!</p>
+        <div class="win-stats">
+            <div><span>Moves</span><strong id="winMoves">0</strong></div>
+            <div><span>Minimum</span><strong id="winMinimum">0</strong></div>
+            <div><span>Time</span><strong id="winTime">00:00</strong></div>
+        </div>
+        <button id="playAgainBtn" class="play-again">Play Again</button>
+    </div>
+</div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
