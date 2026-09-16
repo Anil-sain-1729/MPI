@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DSA 15 Patterns Visualizer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">INTERACTIVE DSA LEARNING</p>
+      <h1>DSA was <span>HARD</span> until I learned these</h1>
+      <p class="hero-text">15 patterns with visual examples, step-by-step animation, pseudocode and complexity.</p>
+    </div>
+    <div class="pattern-badge">15 PATTERNS</div>
+  </header>
+
+  <main class="container">
+    <section class="toolbar">
+      <input id="search" type="text" placeholder="Search a pattern...">
+      <button id="allBtn" class="active">All Patterns</button>
+    </section>
+    <section id="cards" class="cards"></section>
+  </main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-box">
+      <button id="close" class="close">×</button>
+      <div class="modal-head">
+        <div>
+          <p id="mNumber" class="eyebrow"></p>
+          <h2 id="mTitle"></h2>
+          <p id="mShort"></p>
+        </div>
+        <div id="complexity" class="complexity"></div>
+      </div>
+
+      <div class="learn-grid">
+        <div class="visual-panel">
+          <div class="panel-title">
+            <span>VISUALIZATION</span>
+            <span id="stepText">Step 0</span>
+          </div>
+          <div id="visual" class="visual"></div>
+          <div class="controls">
+            <button id="prev">← Previous</button>
+            <button id="play" class="primary">▶ Play</button>
+            <button id="next">Next →</button>
+            <button id="reset">Reset</button>
+          </div>
+          <div class="progress"><div id="progressBar"></div></div>
+        </div>
+
+        <div class="info-panel">
+          <h3>How does it work?</h3>
+          <p id="explanation"></p>
+
+          <h3>Current step</h3>
+          <div id="stepExplanation" class="step-card"></div>
+
+          <h3>Algorithm</h3>
+          <pre id="code"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>DSA Pattern Visualizer • HTML + CSS + JavaScript</footer>
+  <script src="script.js"></script>
+</body>
+</html>
