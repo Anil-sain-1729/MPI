@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tower of Hanoi Game</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:Arial, sans-serif;
+    background:#070b12;
+    color:white;
+}
+
+/* HEADER */
+
+header{
+    text-align:center;
+    padding:25px 15px 10px;
+}
+
+header h1{
+    margin:0;
+    font-size:38px;
+    color:#00e5a0;
+}
+
+header p{
+    color:#8e99a7;
+}
+
+/* GAME */
+
+.game{
+    width:95%;
+    max-width:1100px;
+    margin:auto;
+}
+
+/* CONTROLS */
+
+.controls{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:20px 0;
+}
+
+button,
+select{
+    padding:11px 18px;
+    border-radius:8px;
+    border:1px solid #293440;
+    background:#111820;
+    color:white;
+    cursor:pointer;
+    font-size:15px;
+}
+
+button:hover{
+    background:#1c2732;
+}
+
+.primary{
+    background:#00c98b;
+    color:#03110c;
+    font-weight:bold;
+}
+
+select{
+    outline:none;
+}
+
+/* INFO */
+
+.info{
+    display:flex;
+    justify-content:center;
+    gap:35px;
+    flex-wrap:wrap;
+    margin:15px 0;
+}
+
+.info div{
+    background:#10161e;
+    border:1px solid #26313c;
+    padding:10px 18px;
+    border-radius:8px;
+}
+
+.info span{
+    color:#00e5a0;
+    font-weight:bold;
+}
+
+/* BOARD */
+
+.board{
+    height:480px;
+    background:#0d131b;
+    border:1px solid #26313c;
+    border-radius:15px;
+    display:flex;
+    justify-content:space-around;
+    align-items:flex-end;
+    padding:30px 30px 50px;
+    position:relative;
+    overflow:hidden;
+}
+
+/* TOWER */
+
+.tower{
+    width:30%;
+    height:380px;
+    position:relative;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    flex-direction:column;
+}
+
+.tower-name{
+    position:absolute;
+    bottom:-38px;
+    color:#8e99a7;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.pole{
+    width:8px;
+    height:300px;
+    background:#65717d;
+    position:absolute;
+    bottom:0;
+    border-radius:5px 5px 0 0;
+}
+
+.base{
+    width:95%;
+    height:12px;
+    background:#65717d;
+    position:absolute;
+    bottom:0;
+    border-radius:8px;
+}
+
+/* DISCS */
+
+.disc{
+    height:35px;
+    border-radius:20px;
+    position:absolute;
+    bottom:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#06100c;
+    font-weight:bold;
+    cursor:pointer;
+    transition:
+        left .35s ease,
+        bottom .35s ease,
+        transform .2s ease;
+    box-shadow:0 5px 12px #0008;
+}
+
+.disc:hover{
+    transform:scale(1.04);
+}
+
+.selected{
+    outline:3px solid white;
+    transform:translateY(-8px);
+}
+
+/* ARROW */
+
+.arrow{
+    position:absolute;
+    top:25px;
+    left:50%;
+    transform:translateX(-50%);
+    color:#00e5a0;
+    font-size:20px;
+    font-weight:bold;
+    opacity:0;
+    transition:.3s;
+}
+
+.arrow.show{
+    opacity:1;
+}
+
+/* MESSAGE */
+
+.message{
+    text-align:center;
+    margin:18px auto;
+    background:#10161e;
+    border:1px solid #26313c;
+    border-radius:10px;
+    padding:15px;
+    color:#dce4ec;
+    max-width:800px;
+}
+
+/* INSTRUCTIONS */
+
+.instructions{
+    max-width:800px;
+    margin:20px auto 40px;
+    padding:20px;
+    background:#10161e;
+    border:1px solid #26313c;
+    border-radius:12px;
+}
+
+.instructions h2{
+    color:#00e5a0;
+    margin-top:0;
+}
+
+.instructions li{
+    margin:10px 0;
+    color:#aeb8c3;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:650px){
+
+    header h1{
+        font-size:28px;
+    }
+
+    .board{
+        height:400px;
+        padding-left:5px;
+        padding-right:5px;
+    }
+
+    .tower{
+        height:330px;
+    }
+
+    .pole{
+        height:250px;
+    }
+
+    .disc{
+        height:28px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>🗼 Tower of Hanoi</h1>
+
+<p>
+Interactive Algorithm Game
+</p>
+
+</header>
+
+
+<div class="game">
+
+<!-- CONTROLS -->
+
+<div class="controls">
+
+<label>
+Discs:
+<select id="discCount">
+
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5" selected>5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+
+</select>
+</label>
+
+<button onclick="newGame()">
+New Game
+</button>
+
+<button class="primary" onclick="autoSolve()">
+▶ Auto Solve
+</button>
+
+<button onclick="pauseSolve()">
+⏸ Pause
+</button>
+
+<button onclick="resetGame()">
+↻ Reset
+</button>
+
+</div>
+
+
+<!-- INFO -->
+
+<div class="info">
+
+<div>
+Moves:
+<span id="moves">0</span>
+</div>
+
+<div>
+Minimum:
+<span id="minimum">31</span>
+</div>
+
+<div>
+Step:
+<span id="step">0</span>
+</div>
+
+</div>
+
+
+<!-- BOARD -->
+
+<div class="board">
+
+<div class="arrow" id="arrow">
+↓ Move Disc ↓
+</div>
+
+
+<!-- TOWER A -->
+
+<div class="tower" id="tower0">
+
+<div class="pole"></div>
+<div class="base"></div>
+
+<div class="tower-name">
+TOWER A
+</div>
+
+</div>
+
+
+<!-- TOWER B -->
+
+<div class="tower" id="tower1">
+
+<div class="pole"></div>
+<div class="base"></div>
+
+<div class="tower-name">
+TOWER B
+</div>
+
+</div>
+
+
+<!-- TOWER C -->
+
+<div class="tower" id="tower2">
+
+<div class="pole"></div>
+<div class="base"></div>
+
+<div class="tower-name">
+TOWER C
+</div>
+
+</div>
+
+</div>
+
+
+<!-- MESSAGE -->
+
+<div class="message" id="message">
+
+Click the top disc and then click another tower.
+
+</div>
+
+
+<!-- INSTRUCTIONS -->
+
+<div class="instructions">
+
+<h2>How to Play?</h2>
+
+<ol>
+
+<li>
+Only the <b>top disc</b> of a tower can be moved.
+</li>
+
+<li>
+A larger disc cannot be placed on a smaller disc.
+</li>
+
+<li>
+Move all discs from <b>Tower A → Tower C</b>.
+</li>
+
+<li>
+The minimum number of moves is:
+<b>2ⁿ − 1</b>
+</li>
+
+</ol>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   TOWER OF HANOI
+===================================================== */
+
+let towers = [
+    [],
+    [],
+    []
+];
+
+let discCount = 5;
+
+let selectedTower = null;
+
+let moves = 0;
+
+let solving = false;
+
+let paused = false;
+
+let solution = [];
+
+let solutionIndex = 0;
+
+let timer = null;
+
+
+/* =====================================================
+   COLORS
+===================================================== */
+
+const colors = [
+
+    "#ff5d68",
+    "#ff9f43",
+    "#ffd447",
+    "#00e5a0",
+    "#28a8ff",
+    "#b985ff",
+    "#ff6bce",
+    "#8be9fd"
+
+];
+
+
+/* =====================================================
+   START
+===================================================== */
+
+window.onload = function(){
+
+    newGame();
+
+};
+
+
+/* =====================================================
+   NEW GAME
+===================================================== */
+
+function newGame(){
+
+    stopSolver();
+
+    discCount =
+        parseInt(
+            document.getElementById("discCount").value
+        );
+
+    towers = [
+        [],
+        [],
+        []
+    ];
+
+    moves = 0;
+
+    selectedTower = null;
+
+    solutionIndex = 0;
+
+    solution = [];
+
+    paused = false;
+
+    /*
+       Largest disc = discCount
+       Smallest disc = 1
+    */
+
+    for(let i = discCount; i >= 1; i--){
+
+        towers[0].push(i);
+
+    }
+
+    document.getElementById("minimum").textContent =
+        Math.pow(2,discCount)-1;
+
+    updateInfo();
+
+    draw();
+
+    showMessage(
+        "Game started! Select the top disc."
+    );
+
+}
+
+
+/* =====================================================
+   DRAW GAME
+===================================================== */
+
+function draw(){
+
+    /*
+       Remove old discs
+    */
+
+    for(let i=0;i<3;i++){
+
+        const tower =
+            document.getElementById("tower"+i);
+
+        tower
+        .querySelectorAll(".disc")
+        .forEach(d => d.remove());
+
+    }
+
+
+    /*
+       Draw discs
+    */
+
+    for(let t=0;t<3;t++){
+
+        const tower =
+            document.getElementById("tower"+t);
+
+        const stack = towers[t];
+
+        stack.forEach((disc,index)=>{
+
+            const element =
+                document.createElement("div");
+
+            element.className = "disc";
+
+            element.dataset.tower = t;
+
+            element.dataset.disc = disc;
+
+            /*
+               Width according to disc size
+            */
+
+            const minWidth = 65;
+
+            const maxWidth = 260;
+
+            const width =
+                minWidth +
+                ((disc-1)/(discCount-1 || 1))
+                *
+                (maxWidth-minWidth);
+
+            element.style.width =
+                width + "px";
+
+
+            element.style.background =
+                colors[(disc-1)%colors.length];
+
+
+            /*
+               Position
+            */
+
+            element.style.bottom =
+                (12 + index*36) + "px";
+
+
+            element.style.left =
+                "50%";
+
+            element.style.transform =
+                "translateX(-50%)";
+
+
+            element.textContent =
+                disc;
+
+
+            /*
+               Click event
+            */
+
+            element.addEventListener(
+                "click",
+                function(e){
+
+                    e.stopPropagation();
+
+                    selectDisc(t);
+
+                }
+            );
+
+
+            tower.appendChild(element);
+
+        });
+
+    }
+
+}
+
+
+/* =====================================================
+   SELECT DISC
+===================================================== */
+
+function selectDisc(towerIndex){
+
+    if(solving)
+        return;
+
+    if(towers[towerIndex].length === 0)
+        return;
+
+    /*
+       If no tower selected
+    */
+
+    if(selectedTower === null){
+
+        selectedTower = towerIndex;
+
+        highlightTop(towerIndex);
+
+        showArrow(towerIndex);
+
+        showMessage(
+            "Now click the destination tower."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Clicking same tower
+    */
+
+    if(selectedTower === towerIndex){
+
+        selectedTower = null;
+
+        clearHighlight();
+
+        hideArrow();
+
+        showMessage(
+            "Selection cancelled."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Try move
+    */
+
+    moveDisc(
+        selectedTower,
+        towerIndex
+    );
+
+}
+
+
+/* =====================================================
+   MOVE DISC
+===================================================== */
+
+function moveDisc(from,to){
+
+    const source =
+        towers[from];
+
+    const destination =
+        towers[to];
+
+    if(source.length === 0)
+        return;
+
+
+    const disc =
+        source[source.length-1];
+
+
+    /*
+       Check rule
+    */
+
+    if(
+        destination.length > 0 &&
+        destination[destination.length-1] < disc
+    ){
+
+        showMessage(
+            "❌ Invalid move! A larger disc cannot go on a smaller disc."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Remove from source
+    */
+
+    source.pop();
+
+    /*
+       Add to destination
+    */
+
+    destination.push(disc);
+
+    moves++;
+
+    selectedTower = null;
+
+    clearHighlight();
+
+    hideArrow();
+
+    updateInfo();
+
+    draw();
+
+
+    showMessage(
+        `Disc ${disc}: Tower ${String.fromCharCode(65+from)}
+        → Tower ${String.fromCharCode(65+to)}`
+    );
+
+
+    /*
+       Check win
+    */
+
+    if(towers[2].length === discCount){
+
+        stopSolver();
+
+        showMessage(
+            `🎉 Congratulations! You solved it in ${moves} moves.`
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   HIGHLIGHT TOP DISC
+===================================================== */
+
+function highlightTop(towerIndex){
+
+    clearHighlight();
+
+    const tower =
+        document.getElementById(
+            "tower"+towerIndex
+        );
+
+    const discs =
+        tower.querySelectorAll(".disc");
+
+    if(discs.length){
+
+        discs[discs.length-1]
+        .classList.add("selected");
+
+    }
+
+}
+
+
+/* =====================================================
+   CLEAR HIGHLIGHT
+===================================================== */
+
+function clearHighlight(){
+
+    document
+    .querySelectorAll(".disc")
+    .forEach(d=>{
+        d.classList.remove("selected");
+    });
+
+}
+
+
+/* =====================================================
+   ARROW
+===================================================== */
+
+function showArrow(tower){
+
+    const arrow =
+        document.getElementById("arrow");
+
+    const board =
+        document.querySelector(".board");
+
+    const towersDOM =
+        document.querySelectorAll(".tower");
+
+    const rect =
+        towersDOM[tower].getBoundingClientRect();
+
+    const boardRect =
+        board.getBoundingClientRect();
+
+    const x =
+        rect.left -
+        boardRect.left +
+        rect.width/2;
+
+    arrow.style.left =
+        x+"px";
+
+    arrow.classList.add("show");
+
+}
+
+
+function hideArrow(){
+
+    document
+    .getElementById("arrow")
+    .classList.remove("show");
+
+}
+
+
+/* =====================================================
+   INFO
+===================================================== */
+
+function updateInfo(){
+
+    document.getElementById("moves")
+    .textContent = moves;
+
+    document.getElementById("step")
+    .textContent =
+        solutionIndex;
+
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function showMessage(text){
+
+    document
+    .getElementById("message")
+    .textContent = text;
+
+}
+
+
+/* =====================================================
+   GENERATE SOLUTION
+===================================================== */
+
+function generateSolution(
+    n,
+    from,
+    aux,
+    to
+){
+
+    if(n === 0)
+        return;
+
+
+    /*
+       Move n-1 discs
+       from source to auxiliary
+    */
+
+    generateSolution(
+        n-1,
+        from,
+        to,
+        aux
+    );
+
+
+    /*
+       Move largest disc
+    */
+
+    solution.push([
+        from,
+        to
+    ]);
+
+
+    /*
+       Move n-1 discs
+       auxiliary to destination
+    */
+
+    generateSolution(
+        n-1,
+        aux,
+        from,
+        to
+    );
+
+}
+
+
+/* =====================================================
+   AUTO SOLVE
+===================================================== */
+
+function autoSolve(){
+
+    if(solving)
+        return;
+
+    /*
+       Reset board first
+    */
+
+    newGame();
+
+    solving = true;
+
+    paused = false;
+
+    solution = [];
+
+    solutionIndex = 0;
+
+
+    generateSolution(
+        discCount,
+        0,
+        1,
+        2
+    );
+
+
+    showMessage(
+        "▶ Auto solving... Watch each disc move."
+    );
+
+
+    runNextMove();
+
+}
+
+
+/* =====================================================
+   RUN NEXT MOVE
+===================================================== */
+
+function runNextMove(){
+
+    if(!solving)
+        return;
+
+    if(paused)
+        return;
+
+
+    if(solutionIndex >= solution.length){
+
+        solving = false;
+
+        showMessage(
+            "🎉 Auto Solve Complete!"
+        );
+
+        return;
+
+    }
+
+
+    const move =
+        solution[solutionIndex];
+
+
+    const from =
+        move[0];
+
+    const to =
+        move[1];
+
+
+    const disc =
+        towers[from][
+            towers[from].length-1
+        ];
+
+
+    /*
+       Show moving arrow
+    */
+
+    showMoveArrow(
+        from,
+        to
+    );
+
+
+    /*
+       Animate disc
+    */
+
+    animateDisc(
+        from,
+        to,
+        disc,
+        ()=>{
+
+            towers[from].pop();
+
+            towers[to].push(disc);
+
+            moves++;
+
+            solutionIndex++;
+
+            updateInfo();
+
+            draw();
+
+
+            showMessage(
+                `Step ${solutionIndex}: Disc ${disc}
+                moves ${String.fromCharCode(65+from)}
+                → ${String.fromCharCode(65+to)}`
+            );
+
+
+            timer =
+                setTimeout(
+                    runNextMove,
+                    500
+                );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   MOVE ARROW
+===================================================== */
+
+function showMoveArrow(from,to){
+
+    const arrow =
+        document.getElementById("arrow");
+
+    const towerDOM =
+        document.querySelectorAll(".tower");
+
+    const board =
+        document.querySelector(".board");
+
+    const boardRect =
+        board.getBoundingClientRect();
+
+
+    const r1 =
+        towerDOM[from]
+        .getBoundingClientRect();
+
+    const r2 =
+        towerDOM[to]
+        .getBoundingClientRect();
+
+
+    const x1 =
+        r1.left -
+        boardRect.left +
+        r1.width/2;
+
+    const x2 =
+        r2.left -
+        boardRect.left +
+        r2.width/2;
+
+
+    arrow.style.left =
+        ((x1+x2)/2)+"px";
+
+
+    arrow.innerHTML =
+        `↓ A${from+1} → A${to+1} ↓`;
+
+
+    arrow.classList.add("show");
+
+}
+
+
+/* =====================================================
+   DISC ANIMATION
+===================================================== */
+
+function animateDisc(
+    from,
+    to,
+    disc,
+    callback
+){
+
+    const towerDOM =
+        document.querySelectorAll(".tower");
+
+
+    const source =
+        towerDOM[from];
+
+    const destination =
+        towerDOM[to];
+
+
+    const element =
+        source.querySelector(
+            `.disc[data-disc="${disc}"]`
+        );
+
+
+    if(!element){
+
+        callback();
+
+        return;
+
+    }
+
+
+    const board =
+        document
+        .querySelector(".board");
+
+
+    const boardRect =
+        board.getBoundingClientRect();
+
+
+    const start =
+        element.getBoundingClientRect();
+
+
+    const target =
+        destination.getBoundingClientRect();
+
+
+    const startX =
+        start.left -
+        boardRect.left;
+
+
+    const startY =
+        start.top -
+        boardRect.top;
+
+
+    const targetX =
+        target.left -
+        boardRect.left +
+        target.width/2 -
+        start.width/2;
+
+
+    /*
+       target height
+    */
+
+    const targetY =
+        board.clientHeight -
+        60 -
+        towers[to].length*36;
+
+
+    element.style.position =
+        "absolute";
+
+    element.style.left =
+        startX+"px";
+
+    element.style.top =
+        startY+"px";
+
+    element.style.bottom =
+        "auto";
+
+    /*
+       Stage 1:
+       Move UP
+    */
+
+    element.style.transition =
+        "top .3s ease";
+
+    element.style.top =
+        "60px";
+
+
+    setTimeout(()=>{
+
+        /*
+           Stage 2:
+           Move LEFT / RIGHT
+        */
+
+        element.style.transition =
+            "left .5s ease";
+
+        element.style.left =
+            targetX+"px";
+
+
+        setTimeout(()=>{
+
+            /*
+               Stage 3:
+               Move DOWN
+            */
+
+            element.style.transition =
+                "top .4s ease";
+
+            element.style.top =
+                targetY+"px";
+
+
+            setTimeout(()=>{
+
+                callback();
+
+            },450);
+
+        },550);
+
+    },350);
+
+}
+
+
+/* =====================================================
+   PAUSE
+===================================================== */
+
+function pauseSolve(){
+
+    if(!solving)
+        return;
+
+    paused = !paused;
+
+
+    if(paused){
+
+        showMessage(
+            "⏸ Auto Solve Paused"
+        );
+
+        if(timer){
+
+            clearTimeout(timer);
+
+        }
+
+    }
+    else{
+
+        showMessage(
+            "▶ Auto Solve Resumed"
+        );
+
+        runNextMove();
+
+    }
+
+}
+
+
+/* =====================================================
+   STOP
+===================================================== */
+
+function stopSolver(){
+
+    solving = false;
+
+    paused = false;
+
+    if(timer){
+
+        clearTimeout(timer);
+
+        timer = null;
+
+    }
+
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+function resetGame(){
+
+    stopSolver();
+
+    newGame();
+
+    showMessage(
+        "↻ Game reset."
+    );
+
+}
+
+
+/* =====================================================
+   KEYBOARD
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key === "Escape"){
+
+            selectedTower = null;
+
+            clearHighlight();
+
+            hideArrow();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
