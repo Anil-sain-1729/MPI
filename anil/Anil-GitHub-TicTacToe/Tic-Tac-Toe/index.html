@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anil Sain 1729 - Tic Tac Toe</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="decor x">×</div>
+    <div class="decor o">○</div>
+    <h1><span>Tic</span> Tac <b>Toe</b></h1>
+    <p>Play with Friend or Challenge the Robot</p>
+  </header>
+
+  <div class="modes">
+    <button id="humanMode" class="mode">👥 Human vs Human</button>
+    <button id="robotMode" class="mode active">🤖 Human vs Robot</button>
+  </div>
+
+  <div class="settings">
+    <label>Your Symbol:
+      <select id="symbol"><option>X</option><option>O</option></select>
+    </label>
+    <div id="status" class="status">Your Turn</div>
+    <label id="difficultyBox">Difficulty:
+      <select id="difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium" selected>Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="game-area">
+    <aside class="score-card you">
+      <div class="big-icon">●</div><h2>You</h2><p>Score</p>
+      <strong id="humanScore">0</strong>
+    </aside>
+
+    <div class="board-wrap">
+      <div id="board" class="board">
+        <button class="cell" data-i="0"></button>
+        <button class="cell" data-i="1"></button>
+        <button class="cell" data-i="2"></button>
+        <button class="cell" data-i="3"></button>
+        <button class="cell" data-i="4"></button>
+        <button class="cell" data-i="5"></button>
+        <button class="cell" data-i="6"></button>
+        <button class="cell" data-i="7"></button>
+        <button class="cell" data-i="8"></button>
+        <div id="winLine"></div>
+      </div>
+    </div>
+
+    <aside class="score-card robot">
+      <div class="big-icon">🤖</div><h2 id="opponent">Robot</h2><p>Score</p>
+      <strong id="robotScore">0</strong>
+    </aside>
+  </div>
+
+  <div class="controls">
+    <button id="newGame" class="primary">↻ New Game</button>
+    <button id="undo" class="secondary">↶ Undo</button>
+    <button id="resetScore" class="danger">♲ Reset Score</button>
+  </div>
+
+  <footer>“Small games, big thinking!”</footer>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
