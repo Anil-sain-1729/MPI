@@ -1,0 +1,71 @@
+MLP Regressor
+Before this, you learned that an MLP (Multi-Layer Perceptron) is a neural network made of layers that take numeric inputs, apply weights, bias, and activation functions, and produce outputs.
+
+Now, we use the same MLP structure for regression tasks, where the goal is to predict a continuous numeric value.
+
+1. Output Layer
+
+Regression outputs a single number (price, score, temperature, etc.)
+So the final layer has 1 neuron with linear activation function.
+2. Hidden Layers
+
+These layers apply transformations to learn patterns in the data.
+This allows the model to learn non-linear relationships, unlike simple linear regression.
+3. Forward Pass (How Prediction Happens) Input features → hidden layers → output layer → numeric prediction
+
+The network adjusts weights so that predictions become closer to actual values.
+
+4. Loss Function (MSE Reminder)
+
+You already studied this in ML.
+MLP Regression uses Mean Squared Error (MSE) to measure prediction error:
+
+MSE
+=
+1
+n
+∑
+i
+=
+1
+n
+(
+y
+i
+−
+y
+^
+i
+)
+2
+MSE= 
+n
+1
+​
+  
+i=1
+∑
+n
+​
+ (y 
+i
+​
+ − 
+y
+^
+​
+  
+i
+​
+ ) 
+2
+ 
+Where:
+
+yᵢ = actual value
+ŷᵢ = predicted value
+Training aims to minimize this loss.
+
+Key idea:
+MLP Regression is simply an MLP configured to output one numeric value and trained using MSE.
+
